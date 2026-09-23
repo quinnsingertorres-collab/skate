@@ -154,7 +154,14 @@ defmodule Realtime.Vehicle do
     trip = trip_fn.(trip_id)
     route_id = VehiclePosition.route_id(vehicle_position) || (trip && trip.route_id)
     direction_id = VehiclePosition.direction_id(vehicle_position) || (trip && trip.direction_id)
+    # LOCAL WORKAROUND: public feed has no block/run; fall back to the scheduled trip's block/run
+    block_id = block_id || (trip && trip.block_id)
+    block_id_with_overload = block_id_with_overload || block_id
     block = trip && trip.schedule_id && block_fn.(trip.schedule_id, block_id)
+
+    run_id =
+      run_id ||
+        (block && block.pieces |> Enum.map(& &1.run_id) |> Enum.find(& &1))
     headsign = trip && trip.headsign
     route_pattern = trip && trip.route_pattern_id
     via_variant = trip && trip.route_pattern_id && RoutePattern.via_variant(trip.route_pattern_id)

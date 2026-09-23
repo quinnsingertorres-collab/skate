@@ -1,0 +1,12 @@
+export ERL_FLAGS="+MIscs 4096"
+export GUARDIAN_SECRET_KEY=$(openssl rand -base64 48)
+export SECRET_KEY_BASE=$(openssl rand -base64 48)
+export POSTGRES_USERNAME=postgres POSTGRES_PASSWORD=postgres POSTGRES_HOSTNAME=localhost
+export API_URL=https://api-v3.mbta.com/
+# export API_KEY=   # optional: your MBTA v3 API key (enables the subway-train overlay)
+export GTFS_URL=https://cdn.mbta.com/MBTA_GTFS.zip
+export SKATE_HASTUS_URL=http://127.0.0.1:8111/hastus.zip
+export BUSLOC_URL=https://cdn.mbta.com/realtime/VehiclePositions_enhanced.json
+export TRIP_UPDATES_URL=https://cdn.mbta.com/realtime/TripUpdates_enhanced.json
+export BASE_TILESET_URL="https://tile.openstreetmap.org/{z}/{x}/{y}.png"
+export SATELLITE_TILESET_URL="https://tile.openstreetmap.org/{z}/{x}/{y}.png"
